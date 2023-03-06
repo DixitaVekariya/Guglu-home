@@ -1,0 +1,54 @@
+.headerMainConatiner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #0F2E1D;
+    height: 64px;
+    position: fixed;
+    width: 100%;
+}
+
+.headerChiledContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 80%;
+}
+
+.logo {
+    height: 50px;
+}
+
+.btnMainContainer {
+    overflow: hidden;
+}
+
+.buyBtnContainer {
+    text-decoration: none;
+}
+
+.buyText {
+    color: #fff;
+    font-size: 0.875rem;
+    text-align: center;
+    align-items: center;
+}
+
+.dropdownContainer {
+    position: relative;
+    display: none;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .btnMainContainer {
+        display: none;
+    }
+
+    .dropdownContainer {
+        display: flex;
+    }
+
+}

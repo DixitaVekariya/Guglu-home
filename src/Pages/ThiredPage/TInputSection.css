@@ -1,0 +1,84 @@
+.lotTextContainer {
+    display: flex;
+    padding: 50px 10px 0px 0px;
+    align-items: center;
+}
+
+.lotText {
+    font-size: 1.25rem;
+    text-align: inherit;
+    font-weight: 700;
+    margin-top: 0px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.propertyTextContainer {
+    display: flex;
+    padding: 20px 10px 10px 0px;
+    align-items: center;
+}
+
+.propertyText {
+    font-size: 1rem;
+    text-align: inherit;
+    font-weight: 700;
+    color: #0F2E1D;
+    margin-top: 0px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.thiredFormBtnContainer {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.chiledsThiredFormBtnContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.thiredSaveBtnContainer {
+    background-color: #0F2E1D;
+    border-radius: 50px;
+    margin-bottom: 30px;
+}
+
+.thiredSaveBtnText {
+    padding: 5px 30px 5px 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .aptInputContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .inputAptContainer {
+        display: flex;
+        width: 100%;
+        margin: 0px 10px 0px 0px;
+    }
+    .chiledsThiredFormBtnContainer {
+        width: 100%;
+    }
+
+    .thiredSaveBtnContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .thiredSaveBtnText {
+        text-align: center;
+    }
+
+}

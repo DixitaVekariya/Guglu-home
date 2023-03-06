@@ -1,0 +1,25 @@
+
+.mainFormBtnContainer{
+    display: flex;
+    margin-bottom: 30px;
+}
+.chiledFormBtnContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.saveBtnContainer{
+    background-color: #0F2E1D;
+    border-radius: 50px;
+    margin-bottom: 30px;
+}
+.saveBtnText{
+    padding: 5px 30px 5px 30px;
+   text-decoration: none;
+   font-size: 1rem;
+   font-weight: 600;
+   background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
+   -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

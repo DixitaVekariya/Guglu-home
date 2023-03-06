@@ -1,0 +1,253 @@
+.buldingTextContainer {
+    display: flex;
+    padding: 50px 10px 0px 0px;
+    align-items: center;
+}
+
+.buldingText {
+    font-size: 1.25rem;
+    text-align: inherit;
+    font-weight: 700;
+    margin-top: 0px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.inputMainContainer {
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inputChiledContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.aptInputContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aptText {
+    display: flex;
+
+}
+
+.inputAptContainer {
+    display: flex;
+    flex-direction: row;
+    width: 55%;
+    margin: 0px 50px 0px 0px;
+}
+
+.aptInput {
+    padding: 15px 15px;
+    font-size: 10px;
+}
+
+.roomMainContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px 10px 0px;
+}
+
+.roomMainText {
+    font-size: 1rem;
+    text-align: inherit;
+    font-weight: 700;
+    color: #0F2E1D;
+    margin-top: 0px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.roomMultiInputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.roomChiledContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 20px;
+}
+
+.roomMultiLabelText {
+    color: #0F2E1D;
+    font-size: 1rem;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.roomMultiImputContainer {
+    width: 100%;
+}
+
+.roomMultiInput {
+    padding: 15px 15px;
+    font-size: 0.9rem;
+    font: inherit;
+}
+
+.roomButtonChiledContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 45px;
+}
+
+.textAreaContainer {
+    margin-bottom: 30px;
+}
+
+.addMoreBtnContainer {
+    display: flex;
+    margin-top: 30px;
+}
+
+.chiledAddMoreBtnContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addBtnContainer {
+    background-color: #0F2E1D;
+    border-radius: 50px;
+    margin-bottom: 30px;
+}
+
+.addBtnText {
+    padding: 3px 25px 3px 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.parkingContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.parkingText {
+    font-size: 1rem;
+    text-align: inherit;
+    font-weight: 700;
+    color: #0F2E1D;
+    margin-top: 0px;
+    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+}
+
+.addOrLessButton {
+    border-radius: 5px;
+    background-color: #0F2E1D;
+    border-color: #0F2E1D;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+}
+
+.addOrLessText {
+    color: #ffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+}
+
+.addOrLessInputContainer {
+    justify-content: center;
+    align-items: center;
+}
+
+.addOrlessInput {
+    width: 100px;
+    text-align: center;
+    height: 26px;
+    background-color: rgb(248, 248, 248);
+    ;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+}
+
+.secondFormBtnContainer {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.chiledsSecondFormBtnContainer {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.secondSaveBtnContainer {
+    background-color: #0F2E1D;
+    border-radius: 50px;
+    margin-bottom: 30px;
+}
+
+.secondSaveBtnText {
+    padding: 5px 30px 5px 30px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 650px) {
+
+    .aptInputContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .inputAptContainer {
+        display: flex;
+        width: 100%;
+        margin: 0px 10px 0px 0px;
+    }
+
+    .addOrlessInput {
+        width: 100%;
+    }
+    .chiledsSecondFormBtnContainer {
+        width: 100%;
+    }
+
+    .secondSaveBtnContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .secondSaveBtnText {
+        text-align: center;
+    }
+    .chiledAddMoreBtnContainer {
+        width: 100%;
+    }
+
+    .addBtnContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .addBtnText {
+        text-align: center;
+    }
+
+}

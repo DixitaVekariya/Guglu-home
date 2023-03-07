@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import './SInputSection.css'
+import React, { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField';
 import { Button } from "@mui/material";
 import Autocomplete from '@mui/material/Autocomplete';
@@ -11,9 +10,35 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+import './SInputSection.css'
+import axiosInstance from '../../utils/axiosInstance';
+
 
 const SInputSection = () => {
     const navigate = useNavigate();
+    const [state, setState] = useState({
+        building: '',
+        buildingStyle: '',
+        exteriorFinish: '',
+        size: '',
+        basementDevelopment: '',
+        basementType: '',
+        basementFeatures: '',
+        cooling: '',
+        heating: '',
+        heatingFuel: '',
+        fireplacePresent: '',
+        fireplaceType: '',
+        fireplaceFuel: '',
+        fixtures: '',
+        managementCompany: '',
+        managementUnit: '',
+        roomName: '',
+        roomLevel: '',
+        roomLength: '',
+        roomWidth: '',
+        parkingType: '',
+    })
     const [dateValue, setDateValue] = useState(Date.now)
     const [stories, setStories] = useState(0);
     const [bedrooms, setBedrooms] = useState(0);
@@ -23,23 +48,36 @@ const SInputSection = () => {
     const [fireplace, setFireplace] = useState(0);
     const [managementFee, setManagementFee] = useState(0);
     const [parking, setParking] = useState(0);
+    const [buildingData, setBuildingData] = useState([])
 
 
-    const BuildingType = [
-        { label: 'Alberta' },
-        { label: 'British Columbia' },
-        { label: 'Manitoba' },
-        { label: 'New Brunswick' },
-        { label: 'Newfoundland and Labrador' },
-        { label: "Northwest Territories" },
-        { label: 'Nova Scotia' },
-        { label: 'Nunavut' },
-        { label: 'Ontario' },
-        { label: 'Prince Edward Island' },
-        { label: 'Quebec' },
-        { label: "Saskatchewan" },
-        { label: "Yukon" }
-    ];
+    useEffect(() => {
+        getBuildingData();
+    }, [])
+
+    const buildingOptions = buildingData?.map((item) => item.name)
+
+    const getBuildingData = () => {
+        axiosInstance.get("api/property-building-types/?per_page=100")
+            .then((res) => {
+                console.log("resProvince", res);
+                if (res.status === 200) {
+                    setBuildingData(res.data.data)
+                }
+            })
+            .catch((err) => {
+                console.log("err", err);
+            })
+    }
+
+    const handleChange = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        setState({
+            ...state,
+            [name]: value
+        })
+    }
 
 
     const OnSaveBtnClick = () => {
@@ -63,9 +101,9 @@ const SInputSection = () => {
                             <Autocomplete
                                 disablePortal
                                 id="building-type"
-                                options={BuildingType}
+                                options={buildingOptions}
                                 sx={{ width: 750 }}
-                                renderInput={(params) => <TextField {...params} placeholder={'Select Building Type *'} />}
+                                renderInput={(params) => <TextField value={state.building} name="building" onChange={handleChange} {...params} placeholder={'Select Building Type *'} />}
                             />
                         </div>
                     </div>
@@ -73,21 +111,21 @@ const SInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Building Style</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="building-style" fullWidth placeholder="Enter Building Style Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.buildingStyle} name="buildingStyle" onChange={handleChange} id="building-style" fullWidth placeholder="Enter Building Style Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Exterior Finish *</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="exterior-finish" fullWidth placeholder="Enter Exterior Finish Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.exteriorFinish} name='exteriorFinish' onChange={handleChange} id="exterior-finish" fullWidth placeholder="Enter Exterior Finish Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Size</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="size" fullWidth placeholder="Enter Size Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.size} name="size" onChange={handleChange} id="size" fullWidth placeholder="Enter Size Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -111,7 +149,7 @@ const SInputSection = () => {
                         <p className="aptText">Total stories</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setStories(stories - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={stories} onChange={(e) => setStories(e.target.value)} className="addOrlessInput" />
+                            <input value={stories} name="stories" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setStories(stories + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -120,7 +158,7 @@ const SInputSection = () => {
                         <p className="aptText">Total Bedrooms</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setBedrooms(bedrooms - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={bedrooms} className="addOrlessInput" />
+                            <input value={bedrooms} name="bedrooms" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setBedrooms(bedrooms + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -129,7 +167,7 @@ const SInputSection = () => {
                         <p className="aptText">Beds above ground</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setAboveGround(aboveGround - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={aboveGround} className="addOrlessInput" />
+                            <input value={aboveGround} name="aboveGround" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setAboveGround(aboveGround + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -138,7 +176,7 @@ const SInputSection = () => {
                         <p className="aptText">Beds below ground</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setBeloveGround(beloveGround - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={beloveGround} className="addOrlessInput" />
+                            <input value={beloveGround} name="beloveGround" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setBeloveGround(beloveGround + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -147,7 +185,7 @@ const SInputSection = () => {
                         <p className="aptText">Total Bathroom</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setBathroom(bathroom - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={bathroom} className="addOrlessInput" />
+                            <input value={bathroom} name="bathroom" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setBathroom(bathroom + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -155,63 +193,63 @@ const SInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Basement development</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="basement-development" fullWidth placeholder="Enter Basement development Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.basementDevelopment} name="basementDevelopment" onChange={handleChange} id="basement-development" fullWidth placeholder="Enter Basement development Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Basement type</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="basement-type" fullWidth placeholder="Enter Basement type Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.basementType} name="basementType" onChange={handleChange} id="basement-type" fullWidth placeholder="Enter Basement type Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Basement Features</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="basement-features" fullWidth placeholder="Enter Basement Features Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.basementFeatures} name="basementFeatures" onChange={handleChange} id="basement-features" fullWidth placeholder="Enter Basement Features Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Cooling</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="cooling" fullWidth placeholder="Enter Cooling Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.cooling} name="cooling" onChange={handleChange} id="cooling" fullWidth placeholder="Enter Cooling Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Heating</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="heating" fullWidth placeholder="Enter Heating Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.heating} name="heating" onChange={handleChange} id="heating" fullWidth placeholder="Enter Heating Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Heating Fuel</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="heating-fuel" fullWidth placeholder="Enter Heating Fuel Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.heatingFuel} name="heatingFuel" onChange={handleChange} id="heating-fuel" fullWidth placeholder="Enter Heating Fuel Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Fireplace Present</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="fireplace-Present" fullWidth placeholder="Enter Fireplace Present Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.fireplacePresent} name="fireplacePresent" onChange={handleChange} id="fireplace-Present" fullWidth placeholder="Enter Fireplace Present Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Fireplace Type</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="fireplace-type" fullWidth placeholder="Enter Fireplace Type Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.fireplaceType} name="fireplaceType" onChange={handleChange} id="fireplace-type" fullWidth placeholder="Enter Fireplace Type Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Fireplace Fuel</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="fireplace-fuel" fullWidth placeholder="Enter Fireplace Fuel Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.fireplaceFuel} name="fireplaceFuel" onChange={handleChange} id="fireplace-fuel" fullWidth placeholder="Enter Fireplace Fuel Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -219,7 +257,7 @@ const SInputSection = () => {
                         <p className="aptText">Total Fireplace</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setFireplace(fireplace - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={fireplace} className="addOrlessInput" />
+                            <input value={fireplace} name="fireplace" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setFireplace(fireplace + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -239,14 +277,14 @@ const SInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Fixtures</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="fixtures" fullWidth placeholder="Enter Fixtures Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.fixtures} name="fixtures" onChange={handleChange} id="fixtures" fullWidth placeholder="Enter Fixtures Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Management Company</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="management-company" fullWidth placeholder="Enter Management Company Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.managementCompany} name="managementCompany" onChange={handleChange} id="management-company" fullWidth placeholder="Enter Management Company Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -254,7 +292,7 @@ const SInputSection = () => {
                         <p className="aptText">Management Fee</p>
                         <div className="inputAptContainer">
                             <button className="addOrLessButton" onClick={() => setManagementFee(managementFee - 1)}><b className="addOrLessText">-</b></button>
-                            <input value={managementFee + ' $'} className="addOrlessInput" />
+                            <input value={managementFee} name="managementFee" onChange={handleChange} className="addOrlessInput" />
                             <button className="addOrLessButton" onClick={() => setManagementFee(managementFee + 1)}><b className="addOrLessText">+</b></button>
                         </div>
                     </div>
@@ -262,7 +300,7 @@ const SInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Management Fee unit</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="management-fee" fullWidth placeholder="Enter Management Fee unit Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.managementUnit} name="managementUnit" onChange={handleChange} id="management-fee" fullWidth placeholder="Enter Management Fee unit Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -281,25 +319,25 @@ const SInputSection = () => {
                     <div className="roomChiledContainer">
                         <p className="roomMultiLabelText">Room Name</p>
                         <div className="roomMultiImputContainer">
-                            <TextField className="roomMultiInput" id="room-name" fullWidth placeholder="Room Name (min 2 letters)" variant="outlined" />
+                            <TextField className="roomMultiInput" value={state.roomName} name="roomName" onChange={handleChange} id="room-name" fullWidth placeholder="Room Name (min 2 letters)" variant="outlined" />
                         </div>
                     </div>
                     <div className="roomChiledContainer">
                         <p className="roomMultiLabelText">Level</p>
                         <div className="roomMultiImputContainer">
-                            <TextField className="roomMultiInput" id="room-level" fullWidth placeholder="Room Level" variant="outlined" />
+                            <TextField className="roomMultiInput" value={state.roomLevel} name="roomLevel" onChange={handleChange} id="room-level" fullWidth placeholder="Room Level" variant="outlined" />
                         </div>
                     </div>
                     <div className="roomChiledContainer">
                         <p className="roomMultiLabelText">Length</p>
                         <div className="roomMultiImputContainer">
-                            <TextField className="roomMultiInput" id="room-length" fullWidth placeholder="Room Length" variant="outlined" />
+                            <TextField className="roomMultiInput" value={state.roomLength} name="roomLength" onChange={handleChange} id="room-length" fullWidth placeholder="Room Length" variant="outlined" />
                         </div>
                     </div>
                     <div className="roomChiledContainer">
                         <p className="roomMultiLabelText">Width</p>
                         <div className="roomMultiImputContainer">
-                            <TextField className="roomMultiInput" id="room-width" fullWidth placeholder="Room Width" variant="outlined" />
+                            <TextField className="roomMultiInput" value={state.roomWidth} name="roomWidth" onChange={handleChange} id="room-width" fullWidth placeholder="Room Width" variant="outlined" />
                         </div>
                     </div>
                     <div className="roomButtonChiledContainer">
@@ -323,7 +361,7 @@ const SInputSection = () => {
                         <div className="aptInputContainer">
                             <p className="aptText">Parking Type</p>
                             <div className="inputAptContainer">
-                                <TextField className="aptInput" id="parking-type" fullWidth placeholder="Enter Parking Type Hear" variant="outlined" />
+                                <TextField className="aptInput" value={state.parkingType} name="parkingType" onChange={handleChange} id="parking-type" fullWidth placeholder="Enter Parking Type Hear" variant="outlined" />
                             </div>
                         </div>
                         <div style={{ height: '30px' }}></div>
@@ -331,7 +369,7 @@ const SInputSection = () => {
                             <p className="aptText">Total Parking Spots</p>
                             <div className="inputAptContainer">
                                 <button className="addOrLessButton" onClick={() => setParking(parking - 1)}><b className="addOrLessText">-</b></button>
-                                <input value={parking} className="addOrlessInput" />
+                                <input value={parking} name="parking" onChange={handleChange} className="addOrlessInput" />
                                 <button className="addOrLessButton" onClick={() => setParking(parking + 1)}><b className="addOrLessText">+</b></button>
                             </div>
                         </div>

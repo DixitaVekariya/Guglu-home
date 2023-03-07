@@ -12,13 +12,35 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 const TInputSection = () => {
     const navigate = useNavigate();
+    const [state, setState] = useState({
+        sizeTotal: '',
+        sizeFront: '',
+        sizeDepth: '',
+        accessType: '',
+        landscapFeatures: '',
+        type: '',
+        acress: '',
+        lotFeatures: '',
+        extraFeatures: '',
+        sewerWater: '',
+        view: ''
+    })
     const [dateValue, setDateValue] = useState(Date.now(''))
     const [fromTimevalue, setFromTimeValue] = useState(Date.now);
     const [toTimevalue, setToTimeValue] = useState(Date.now);
 
+    const handleChange = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        setState({
+            ...state,
+            [name]: value
+        })
+    }
+
     const OnSaveBtnClick = () => {
         navigate(ClientRoutes.lastpage);
-        window.scrollTo({
+        window.scrollTo({ 
             top: 0,
             behavior: 'smooth',
         });
@@ -37,56 +59,56 @@ const TInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Size Total</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="size-total" fullWidth placeholder="Enter Size Total Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.sizeTotal} name="sizeTotal" onChange={handleChange} id="size-total" fullWidth placeholder="Enter Size Total Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Size Front</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="size-front" fullWidth placeholder="Enter Size Front Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.sizeFront} name="sizeFront" onChange={handleChange} id="size-front" fullWidth placeholder="Enter Size Front Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Size Depth</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="size-depth" fullWidth placeholder="Enter Size Depth Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.sizeDepth} name="sizeDepth" onChange={handleChange} id="size-depth" fullWidth placeholder="Enter Size Depth Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Access Type</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="access-type" fullWidth placeholder="Enter Access Type Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.accessType} name="accessType" onChange={handleChange} id="access-type" fullWidth placeholder="Enter Access Type Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Landscape features</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="landscape-features" fullWidth placeholder="Enter Landscape features Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.landscapFeatures} name="landscapFeatures" onChange={handleChange} id="landscape-features" fullWidth placeholder="Enter Landscape features Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Type</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="outlined-basic" fullWidth placeholder="Enter Type Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.type} name="type" onChange={handleChange} id="outlined-basic" fullWidth placeholder="Enter Type Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Acres</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="type" fullWidth placeholder="Enter Acres Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.acress} name="acress" onChange={handleChange} id="type" fullWidth placeholder="Enter Acres Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Lot Features</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="lot-features" fullWidth placeholder="Enter Lot Features Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.lotFeatures} name="lotFeatures" onChange={handleChange} id="lot-features" fullWidth placeholder="Enter Lot Features Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -100,21 +122,21 @@ const TInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Extra Features</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="extra-features" fullWidth placeholder="Enter Extra Features Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.extraFeatures} name="extraFeatures" onChange={handleChange} id="extra-features" fullWidth placeholder="Enter Extra Features Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">Sewer/ Water</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="sewer-water" fullWidth placeholder="Enter Sewer/ Water Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.sewerWater} name="sewerWater" onChange={handleChange} id="sewer-water" fullWidth placeholder="Enter Sewer/ Water Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                     <div className="aptInputContainer">
                         <p className="aptText">View</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="view" fullWidth placeholder="Enter View Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.view} name="view" onChange={handleChange} id="view" fullWidth placeholder="Enter View Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
@@ -129,7 +151,7 @@ const TInputSection = () => {
                     <LocalizationProvider dateAdapter={AdapterDayjs} fullWidth>
                         <DatePicker
                             value={dateValue}
-                            inputFormat = 'DD/MM/YYYY'
+                            inputFormat='DD/MM/YYYY'
                             onChange={(newValue) => {
                                 setDateValue(newValue);
                             }}
@@ -190,7 +212,7 @@ const TInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Appointments *</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" id="appointments" fullWidth placeholder="Enter Appointments Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.appintment} name="appointment" onChange={handleChange} id="appointments" fullWidth placeholder="Enter Appointments Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>

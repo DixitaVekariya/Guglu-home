@@ -154,7 +154,7 @@ const InputSection = () => {
         })
     }
 
-   
+
     const OnSaveBtnClick = () => {
         setError({
             ...defaultErrors
@@ -208,7 +208,7 @@ const InputSection = () => {
 
 
     return (
-        <> 
+        <>
             <div className="subjectTextContainer">
                 <h5 className="subjectText">SUBJECT PROPERTY</h5>
             </div>

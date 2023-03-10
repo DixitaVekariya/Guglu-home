@@ -348,7 +348,14 @@ const InputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Designation*</p>
                         <div className="inputAptContainer">
-
+                            <div style={{border: '1px solid lightgray',borderRadius: '50px', display:'flex'}}>
+                                <Button style={{backgroundColor: '#0F2E1D', margin: '5px',borderRadius: '50px'}}>
+                                   <span  style={{color: '#ffff'}}>Residential</span> 
+                                </Button>
+                                <Button style={{ margin: '5px',borderRadius: '50px'}}>
+                                    <span style={{color: '#0F2E1D'}}>Commercial</span>
+                                </Button>
+                            </div>
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>

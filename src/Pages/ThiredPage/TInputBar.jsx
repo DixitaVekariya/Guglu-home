@@ -3,7 +3,7 @@ import './TInputBar.css'
 import TInputSection from "./TInputSection";
 
 const TInputBar = () => {
-    return(
+    return (
         <>
             <div className="mainContainer">
                 <div className="chiledMainContainer">
@@ -11,7 +11,7 @@ const TInputBar = () => {
                         <div className="addTextContainer">
                             <h5 className="addText">Add Listing</h5>
                         </div>
-                        <a href="" style={{ textDecoration: 'none' }}>
+                        <div style={{ cursor: 'pointer' }}>
                             <div className="multiBtnContainer">
                                 <div className="otherStepContainer">
                                     <a href="" className="otherStepText" >1</a>
@@ -29,8 +29,8 @@ const TInputBar = () => {
                                     <a href="" className="otherStepText">5</a>
                                 </div>
                             </div>
-                        </a>
-                        <TInputSection/>
+                        </div>
+                        <TInputSection />
                     </div>
                 </div>
             </div>

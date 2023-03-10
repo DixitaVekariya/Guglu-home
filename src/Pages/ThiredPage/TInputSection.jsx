@@ -9,9 +9,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+
 
 const TInputSection = () => {
     const navigate = useNavigate();
+    const defaultErrors = {
+        appointmentErrorMessage: '',
+    }
     const [state, setState] = useState({
         sizeTotal: '',
         sizeFront: '',
@@ -23,11 +28,17 @@ const TInputSection = () => {
         lotFeatures: '',
         extraFeatures: '',
         sewerWater: '',
-        view: ''
+        view: '',
+        appointment: ''
     })
     const [dateValue, setDateValue] = useState(Date.now(''))
     const [fromTimevalue, setFromTimeValue] = useState(Date.now);
     const [toTimevalue, setToTimeValue] = useState(Date.now);
+    const [error, setError] = useState({
+        // appointmentErrorMessage: ''
+        ...defaultErrors
+    })
+
 
     const handleChange = (event) => {
         const name = event.target.name
@@ -39,11 +50,31 @@ const TInputSection = () => {
     }
 
     const OnSaveBtnClick = () => {
-        navigate(ClientRoutes.lastpage);
-        window.scrollTo({ 
-            top: 0,
-            behavior: 'smooth',
-        });
+        setError({
+            ...defaultErrors
+        })
+
+        const errorMessages = {}
+
+        if (!state.appointment.trim()) {
+            errorMessages.appointmentErrorMessage = "Appointments is required!"
+
+        }
+        if (Object.values(errorMessages).length) {
+            setError({
+                ...defaultErrors, ...errorMessages
+            })
+            return
+        }
+        else {
+            navigate(ClientRoutes.lastpage);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+
+      
     }
 
     return (
@@ -212,12 +243,18 @@ const TInputSection = () => {
                     <div className="aptInputContainer">
                         <p className="aptText">Appointments *</p>
                         <div className="inputAptContainer">
-                            <TextField className="aptInput" value={state.appintment} name="appointment" onChange={handleChange} id="appointments" fullWidth placeholder="Enter Appointments Hear" variant="outlined" />
+                            <TextField className="aptInput" value={state.appointment} name="appointment" onChange={handleChange} id="appointments" fullWidth placeholder="Enter Appointments Hear" variant="outlined" />
                         </div>
                     </div>
                     <div style={{ height: '30px' }}></div>
                 </div>
             </div>
+            {error.appointmentErrorMessage &&
+                <div className="errorContainer">
+                    <ErrorOutlineIcon style={{ color: '#f44336', marginRight: '10px' }} />
+                    {error.appointmentErrorMessage}
+                </div>
+            }
             <div className="thiredFormBtnContainer">
                 <div className="chiledsThiredFormBtnContainer">
                     <div className="thiredSaveBtnContainer">

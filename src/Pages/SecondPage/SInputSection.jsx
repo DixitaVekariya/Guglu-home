@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import './SInputSection.css'
 import axiosInstance from '../../utils/axiosInstance';
@@ -16,6 +17,10 @@ import axiosInstance from '../../utils/axiosInstance';
 
 const SInputSection = () => {
     const navigate = useNavigate();
+    const defaultErrors = {
+        buildingErrorMessage: '',
+        ExteriorErrorMessage: ''
+    }
     const [state, setState] = useState({
         building: '',
         buildingStyle: '',
@@ -49,6 +54,11 @@ const SInputSection = () => {
     const [managementFee, setManagementFee] = useState(0);
     const [parking, setParking] = useState(0);
     const [buildingData, setBuildingData] = useState([])
+    const [error, setError] = useState({
+        // buildingErrorMessage: '',
+        // ExteriorErrorMessage: ''
+        ...defaultErrors
+    })
 
 
     useEffect(() => {
@@ -81,11 +91,33 @@ const SInputSection = () => {
 
 
     const OnSaveBtnClick = () => {
-        navigate(ClientRoutes.thiredPage);
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
+        // console.log("sbjknjm");
+        setError({
+            ...defaultErrors
+        })
+
+        const errorMessages = {}
+
+        if (!state.building.trim()) {
+            errorMessages.buildingErrorMessage = "Building Type is Required!"
+
+        } if (!state.exteriorFinish.trim()) {
+            errorMessages.ExteriorErrorMessage = "Exterior Finish is Required!"
+
+        } 
+        if (Object.values(errorMessages).length) {
+            setError({
+                ...defaultErrors, ...errorMessages
+            })
+            return
+        }
+        else {
+            navigate(ClientRoutes.thiredPage);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
     }
 
     return (
@@ -373,10 +405,22 @@ const SInputSection = () => {
                                 <button className="addOrLessButton" onClick={() => setParking(parking + 1)}><b className="addOrLessText">+</b></button>
                             </div>
                         </div>
-                        <div style={{ height: '30px' }}></div>
+                        <div style={{ height: '20px' }}></div>
                     </div>
                 </div>
             </div>
+            {error.buildingErrorMessage &&
+                <div className="errorContainer">
+                    <ErrorOutlineIcon style={{ color: '#f44336', marginRight: '10px' }} />
+                    {error.buildingErrorMessage}
+                </div>
+            }
+            {error.ExteriorErrorMessage &&
+                <div className="errorContainer">
+                    <ErrorOutlineIcon style={{ color: '#f44336', marginRight: '10px' }} />
+                    {error.ExteriorErrorMessage}
+                </div>
+            }
             <div className="secondFormBtnContainer">
                 <div className="chiledsSecondFormBtnContainer">
                     <div className="secondSaveBtnContainer">

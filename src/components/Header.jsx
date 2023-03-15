@@ -115,7 +115,7 @@ const Header = () => {
 
     return (
         <>
-            <header className="headerMainConatiner">
+            <div className="headerMainConatiner">
                 <div className="headerChiledContainer" >
                     <div className="logoMainContainer">
                         <img className="logo" src="https://guglu.ca/static/images/gugluLogo.png" alt="GUGLU" />
@@ -223,7 +223,7 @@ const Header = () => {
                         </Menu>
                     </div>
                 </div>
-            </header>
+            </div>
         </>
     )
 }

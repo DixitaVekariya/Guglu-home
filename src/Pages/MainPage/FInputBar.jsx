@@ -14,7 +14,7 @@ const InputBar = () => {
                         <a href="" style={{ textDecoration: 'none' }}>
                             <div className="multiBtnContainer">
                                 <div className="firstStepContainer">
-                                    <a href="" className="firstStepText" >1</a>
+                                    <a   href="" className="firstStepText" >1</a>
                                 </div>
                                 <div className="otherStepContainer">
                                     <a href="" className="otherStepText">2</a>

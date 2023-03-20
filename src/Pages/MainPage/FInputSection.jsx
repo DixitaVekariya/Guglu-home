@@ -3,6 +3,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -34,11 +37,13 @@ const InputSection = () => {
     province: "",
     city: "",
     fronting: "",
+    list: "",
     owenership: "",
     communityName: "",
     contryName: "",
     postalCode: "",
     pricePer: "",
+    poolType: "",
     taxe: "",
     taxeYear: "",
     assessment: "",
@@ -46,6 +51,7 @@ const InputSection = () => {
     specialDesignation: "",
     description: "",
   });
+  const [alignment, setAlignment] = useState("residential");
   const [provinceData, setProvinceData] = useState([]);
   const [citydata, setCityData] = useState([]);
   const [price, setPrice] = useState(0);
@@ -153,39 +159,46 @@ const InputSection = () => {
     });
   };
 
-  const onProvinceChangeHandler = (event) => {
-    setState.province(event.target.value);
+  const handleAlignment = (event, newAlignment) => {
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
-    // console.log("provinceData=>>>>>", state.province);
-
   const OnSaveBtnClick = () => {
-    let getInputData = [];
-    let xyz = {};
+    let names;
+    let getInputAllData = localStorage.getItem("allInputData");
 
-    getInputData = [
-      state.unitApt,
-      state.streetHouse,
-      state.property,
-      state.province,
-      state.city,
-      state.fronting,
-      state.owenership,
-      state.communityName,
-      state.contryName,
-      state.postalCode,
-      state.pricePer,
-      state.taxe,
-      state.taxeYear,
-      state.assessment,
-      state.assessmentYear,
-      state.specialDesignation,
-      state.description,
-    ];
-    localStorage.setItem("getInputData", JSON.stringify(getInputData));
-    xyz = JSON.parse(localStorage.getItem("getInputData") || []);
-    console.log("xyz>>>>>>>>>>", xyz);
-    // localStorage.getItem('getInputData', JSON.stringify(getInputData));
+    if (getInputAllData === null) {
+      names = [];
+    } else {
+      names = JSON.parse(getInputAllData);
+    }
+
+    names.push({
+      unitApt: state.unitApt,
+      streetHouse: state.streetHouse,
+      province: state.province,
+      city: state.city,
+      communityName: state.communityName,
+      contryName: state.contryName,
+      postalCode: state.postalCode,
+      fronting: state.fronting,
+      list: state.list,
+      pricePer: state.pricePer,
+      property: state.property,
+      owenership: state.owenership,
+      taxe: state.taxe,
+      taxeYear: state.taxeYear,
+      assessment: state.assessment,
+      assessmentYear: state.assessmentYear,
+      specialDesignation: state.specialDesignation,
+      poolType: state.poolType,
+      description: state.description,
+    });
+
+    // localStorage.setItem("allInputData", JSON.stringify(names));
+
     setError({
       ...defaultErrors,
     });
@@ -201,21 +214,21 @@ const InputSection = () => {
     if (!state.contryName.trim()) {
       errorMessages.contryNameErrorMessage = "Contry is required!";
     }
-    if (!state.fronting.trim()) {
-      errorMessages.frontingErrorMessage = "Fronting On is required!";
-    }
-    if (!state.property.trim()) {
-      errorMessages.PropertyErrorMessage = "Property  Type is required!";
-    }
-    if (!state.owenership.trim()) {
-      errorMessages.owenershipErrorMessage = "Owenership Type is required!";
-    }
-    if (!state.city.trim()) {
-      errorMessages.cityErrorMessage = "City is required!";
-    }
-    if (!state.province.trim()) {
-      errorMessages.provinceErrorMessage = "Province is required!";
-    }
+    // if (!state.fronting.trim()) {
+    //   errorMessages.frontingErrorMessage = "Fronting On is required!";
+    // }
+    // if (!state.property.trim()) {
+    //   errorMessages.PropertyErrorMessage = "Property  Type is required!";
+    // }
+    // if (!state.owenership.trim()) {
+    //   errorMessages.owenershipErrorMessage = "Owenership Type is required!";
+    // }
+    // if (!state.city.trim()) {
+    //   errorMessages.cityErrorMessage = "City is required!";
+    // }
+    // if (!state.province.trim()) {
+    //   errorMessages.provinceErrorMessage = "Province is required!";
+    // }
     if (!state.description.trim()) {
       errorMessages.descriptionErrorMessage = "Description is required!";
     }
@@ -226,6 +239,7 @@ const InputSection = () => {
       });
       return;
     } else {
+      localStorage.setItem("allInputData", JSON.stringify(names));
       navigate(ClientRoutes.secondPage);
       window.scrollTo({
         top: 0,
@@ -240,7 +254,7 @@ const InputSection = () => {
         <h5 className="subjectText">SUBJECT PROPERTY</h5>
       </div>
       <div className="addressTextContainer">
-        <h5 className="addressText">ADDRESS</h5>,
+        <h5 className="addressText">ADDRESS</h5>
       </div>
       <div className="inputMainContainer">
         <div className="inputChiledContainer">
@@ -283,14 +297,11 @@ const InputSection = () => {
                 disablePortal
                 id="province"
                 options={provinceOptions}
-                // value={state.province}
                 sx={{ width: 750 }}
-                // onInputChange={(e) => setState.province(e.target.value)}
                 renderInput={(params) => (
                   <TextField
                     value={state.province}
                     name="province"
-                    // onChange= {() => onProvinceChangeHandler()}
                     onChange={handleChange}
                     {...params}
                     placeholder={"Select Province"}
@@ -486,7 +497,7 @@ const InputSection = () => {
           <div className="aptInputContainer">
             <p className="aptText">Designation*</p>
             <div className="inputAptContainer">
-              <div
+              {/* <div
                 style={{
                   border: "1px solid lightgray",
                   borderRadius: "50px",
@@ -505,7 +516,33 @@ const InputSection = () => {
                 <Button style={{ margin: "5px", borderRadius: "50px" }}>
                   <span style={{ color: "#0F2E1D" }}>Commercial</span>
                 </Button>
-              </div>
+              </div> */}
+              <ToggleButtonGroup
+                value={alignment}
+                exclusive
+                onChange={handleAlignment}
+                aria-label="text alignment"
+                style={{
+                  border: "1px solid lightgray",
+                  borderRadius: "50px",
+                  display: "flex",
+                }}
+              >
+                <ToggleButton value="residential" aria-label="left aligned" style={{
+                    backgroundColor: "#0F2E1D",
+                    margin: "5px",
+                    borderRadius: "50px",
+                  }}>
+                  <div >
+                    <span style={{ color: "#ffff" }}>Residential</span>
+                  </div>
+                </ToggleButton>
+                <ToggleButton value="commercial" aria-label="centered">
+                  <div style={{ margin: "5px", borderRadius: "50px" }}>
+                    <span style={{ color: "#0F2E1D" }}>Commercial</span>
+                  </div>
+                </ToggleButton>
+              </ToggleButtonGroup>
             </div>
           </div>
           <div style={{ height: "30px" }}></div>

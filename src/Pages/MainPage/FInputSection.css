@@ -1,191 +1,187 @@
 .subjectTextContainer {
-    display: flex;
-    padding: 50px 10px 0px 0px;
-    align-items: center;
+  display: flex;
+  padding: 50px 10px 0px 0px;
+  align-items: center;
 }
 
 .subjectText {
-    font-size: 1.25rem;
-    text-align: inherit;
-    font-weight: 700;
-    margin-top: 0px;
-    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 1.25rem;
+  text-align: inherit;
+  font-weight: 700;
+  margin-top: 0px;
+  font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
 }
 
 .addressTextContainer {
-    display: flex;
-    padding: 20px 10px 10px 0px;
-    align-items: center;
+  display: flex;
+  padding: 20px 10px 10px 0px;
+  align-items: center;
 }
 
 .addressText {
-    font-size: 1rem;
-    text-align: inherit;
-    font-weight: 700;
-    color: #0F2E1D;
-    margin-top: 0px;
-    font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 1rem;
+  text-align: inherit;
+  font-weight: 700;
+  color: #0f2e1d;
+  margin-top: 0px;
+  font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
 }
 
 .inputMainContainer {
-    /* display: flex; */
-    flex-direction: column;
-    justify-content: center;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
 }
 
 .inputChiledContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .aptInputContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .aptText {
-    display: flex;
-
+  display: flex;
 }
 
 .inputAptContainer {
-    display: flex;
-    width: 55%;
-    margin: 0px 50px 0px 0px;
+  display: flex;
+  width: 55%;
+  margin: 0px 50px 0px 0px;
 }
 
 .aptInput {
-    padding: 15px 15px;
-    font-size: 10px;
-    border-color: #53af5b !important;
+  padding: 15px 15px;
+  font-size: 10px;
+  border-color: #53af5b !important;
 }
 
 .textAreaContainer {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .textArea {
-    display: flex;
-    width: 80%;
-    border-radius: 5px;
-    padding: 20px;
+  display: flex;
+  width: 80%;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .mainFormBtnContainer {
-    display: flex;
-    margin-bottom: 20px;
-    margin-top: 30px;
+  display: flex;
+  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 .chiledFormBtnContainer {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .saveBtnContainer {
-
-    background-color: #0F2E1D;
-    border-radius: 50px;
-    margin-bottom: 30px;
+  background-color: #0f2e1d;
+  border-radius: 50px;
+  margin-bottom: 30px;
 }
 
 .saveBtnText {
-
-    padding: 5px 30px 5px 30px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  padding: 5px 30px 5px 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background: -webkit-linear-gradient(0deg, #60efb9 30%, #f9db4a 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .addOrLessButton {
-    border-radius: 5px;
-    background-color: #0F2E1D;
-    border-color: #0F2E1D;
-    cursor: pointer;
-    height: 30px;
-    width: 30px;
+  border-radius: 5px;
+  background-color: #0f2e1d;
+  border-color: #0f2e1d;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
 }
 
 .addOrLessText {
-    color: #ffff;
-    font-size: 1.5rem;
-    font-weight: 700;
-
+  color: #ffff;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .addOrlessInput {
-    width: 100px;
-    text-align: center;
-    height: 26px;
-    background-color: rgb(248, 248, 248);
-    font-size: 1rem;
-    font-weight: 500;
-    border: none;
+  width: 100px;
+  text-align: center;
+  height: 26px;
+  background-color: rgb(248, 248, 248);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
 }
-.errorContainer{
-    align-items: center;
-    display: flex;
-    width: 80%;
-    background-color:  rgb(253, 236, 234);
-    color: rgb(97, 26, 21);
-    height: 37px;
-    border-radius: 10px;
-    font-weight: 400;
-    font-size: 0.875rem;
-    padding: 6px 16px;
-    margin-bottom: 10px;
-    font-family: BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Oxygen,Ubuntu,Droid Sans,Helvetica Neue,Helvetica,sans-serif;
+.errorContainer {
+  align-items: center;
+  display: flex;
+  width: 80%;
+  background-color: rgb(253, 236, 234);
+  color: rgb(97, 26, 21);
+  height: 37px;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 0.875rem;
+  padding: 6px 16px;
+  margin-bottom: 10px;
+  font-family: BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Droid Sans, Helvetica Neue, Helvetica, sans-serif;
 }
 
 @media only screen and (max-width: 650px) {
+  .aptInputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .aptInputContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .inputAptContainer {
+    display: flex;
+    width: 100%;
+    margin: 0px 10px 0px 0px;
+  }
 
-    .inputAptContainer {
-        display: flex;
-        width: 100%;
-        margin: 0px 10px 0px 0px;
-    }
+  .addOrlessInput {
+    width: 100%;
+  }
 
-    .addOrlessInput {
-        width: 100%;
-    }
+  .textArea {
+    width: 90%;
+    padding: 20px;
+    background-color: #fafafa;
+  }
 
-    .textArea {
-        width: 90%;
-        padding: 20px;
-        background-color: #fafafa;
-    }
+  .chiledFormBtnContainer {
+    width: 100%;
+  }
 
-    .chiledFormBtnContainer {
-        width: 100%;
-    }
+  .saveBtnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .saveBtnContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .saveBtnText {
-        text-align: center;
-    }
-    .errorContainer{
-        width: 90%;
-        padding: 20px;
-        height: 10px;
-    }
-
-
+  .saveBtnText {
+    text-align: center;
+  }
+  .errorContainer {
+    width: 90%;
+    padding: 20px;
+    height: 10px;
+  }
 }

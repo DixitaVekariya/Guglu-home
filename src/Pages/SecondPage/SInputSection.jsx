@@ -89,16 +89,56 @@ const SInputSection = () => {
   };
 
   const OnSaveBtnClick = () => {
-    // console.log("sbjknjm");
+    let names;
+    let getInputAllData = localStorage.getItem("allInputData");
+
+    if (getInputAllData === null) {
+      names = [];
+    } else {
+      names = JSON.parse(getInputAllData);
+    }
+
+    names.push({
+      building: state.building,
+      buildingStyle: state.buildingStyle,
+      exteriorFinish: state.exteriorFinish,
+      size: state.size,
+      basementDevelopment: state.basementDevelopment,
+      basementType: state.basementType,
+      basementFeatures: state.basementFeatures,
+      cooling: state.cooling,
+      heating: state.heating,
+      heatingFuel: state.heatingFuel,
+      fireplacePresent: state.fireplacePresent,
+      fireplaceType: state.fireplaceType,
+      fireplaceFuel: state.fireplaceFuel,
+      fixtures: state.fixtures,
+      managementCompany: state.managementCompany,
+      managementUnit: state.managementUnit,
+      roomName: state.roomName,
+      roomLevel: state.roomLevel,
+      roomLength: state.roomLength,
+      roomWidth: state.roomWidth,
+      parkingType: state.parkingType,
+      date: dateValue,
+      stories: stories,
+      bedrooms: bedrooms,
+      aboveGround: aboveGround,
+      beloveGround: beloveGround,
+      bathroom: bathroom,
+      fireplace: fireplace,
+      managementFee: managementFee,
+      parking: parking,
+    });
     setError({
       ...defaultErrors,
     });
 
     const errorMessages = {};
 
-    if (!state.building.trim()) {
-      errorMessages.buildingErrorMessage = "Building Type is Required!";
-    }
+    // if (!state.building.trim()) {
+    //   errorMessages.buildingErrorMessage = "Building Type is Required!";
+    // }
     if (!state.exteriorFinish.trim()) {
       errorMessages.ExteriorErrorMessage = "Exterior Finish is Required!";
     }
@@ -109,6 +149,7 @@ const SInputSection = () => {
       });
       return;
     } else {
+      localStorage.setItem("allInputData", JSON.stringify(names));
       navigate(ClientRoutes.thiredPage);
       window.scrollTo({
         top: 0,

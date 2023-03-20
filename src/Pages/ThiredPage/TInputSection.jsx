@@ -39,7 +39,7 @@ const TInputSection = () => {
   });
 
   const handleChange = (event) => {
-    const name = event.target.name0;
+    const name = event.target.name;
     const value = event.target.value;
     setState({
       ...state,
@@ -48,6 +48,30 @@ const TInputSection = () => {
   };
 
   const OnSaveBtnClick = () => {
+    let names;
+    let getInputAllData = localStorage.getItem("allInputData");
+
+    if (getInputAllData === null) {
+      names = [];
+    } else {
+      names = JSON.parse(getInputAllData);
+    }
+
+    names.push({
+      sizeTotal: state.sizeTotal,
+      sizeFront: state.sizeFront,
+      sizeDepth: state.sizeDepth,
+      accessType: state.accessType,
+      landscapFeatures: state.landscapFeatures,
+      type: state.type,
+      acress: state.acress,
+      lotFeatures: state.lotFeatures,
+      extraFeatures: state.extraFeatures,
+      sewerWater: state.sewerWater,
+      view: state.view,
+      appointment: state.appointment,
+    });
+
     setError({
       ...defaultErrors,
     });
@@ -64,6 +88,7 @@ const TInputSection = () => {
       });
       return;
     } else {
+      localStorage.setItem("allInputData", JSON.stringify(names));
       navigate(ClientRoutes.lastpage);
       window.scrollTo({
         top: 0,
